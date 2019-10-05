@@ -2,24 +2,15 @@ import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
 
-import {PatternManager} from 'sequencer'
+import textExploder from 'text-exploder-two'
+
+const { Modal, dummyData } = textExploder
 
 
 function App() {
-
-console.log("->", PatternManager)
-
   return (
     <div className="App">
-      <PatternManager
-        handler={(cells) => console.log(cells)}
-      />
-      <PatternManager
-        handler={(cells) => console.log(cells)}
-      />
-      <PatternManager
-        handler={(cells) => console.log(cells)}
-      />
+      <Modal data={dummyData} />
     </div>
   );
 }
