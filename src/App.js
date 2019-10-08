@@ -27,18 +27,31 @@ const {
 
 const Workbench = styled.div`
   /* border: solid; */
-  width: 100%;
+  /* width: 100%; */
 `
 const Options = styled.div`
-  border-left: solid;
+  border: 1px solid red;
+  display: flex;
   width: 100%;
-  height: 100%;
+  flex-wrap: wrap;
+
+  /* width: 100%;
+  height: 100%; */
 `
 
 const Wrapper = styled.div`
+  width: 80%;
+  /* border: solid; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`
+
+const AppWrapper = styled.div`
   border: solid;
   display: flex;
-  /* height: 25vh; */
+  flex-wrap: wrap;
+  justify-content: center;
 `
 
 function App() {
@@ -53,15 +66,33 @@ function App() {
   console.log(chords)
 
   return (
-    <div className="App">
+    <AppWrapper>
       <Wrapper>
+
+
+        <Options>
+
+          <ProgressionChordOptions
+            onSubmit={
+              () => setChords(getRandomProgression(
+                { key, mode, tempo, theme: null }
+              ))}
+            onKeyChange={ ({target: {value}}) => setKey(value) }
+            onModeChange={ ({target: {value}}) => setMode(value)}
+            onTempoChange={ ({target: {value}}) => setTempo(parseInt(value))}
+          />
+
+          <ProgressionPatternOptions
+            onChange={(pattern) => {setChordPattern(pattern)}}
+          />
+        </Options>
+
         <Workbench>
           <ProgressionWorkbench
             getKeyChords={() => getAllChords({mode, key})}
             changeChord={({name, notes, index}) => {
               const newChords = {...chords}
               const newNotes = chordNotes(name)
-              console.log("NEW NOTES", newNotes)
               newChords.chordNames[index] = name
               newChords.chordNotes[index] = newNotes
               setChords(newChords)
@@ -92,27 +123,12 @@ function App() {
           />
         </Workbench>
 
-        <Options>
-          <ProgressionPatternOptions
-            onChange={(pattern) => {setChordPattern(pattern)}}
-          />
-          <ProgressionChordOptions
-            onSubmit={
-              () => setChords(getRandomProgression(
-                { key, mode, tempo, theme: null }
-              ))}
-            onKeyChange={ ({target: {value}}) => setKey(value) }
-            onModeChange={ ({target: {value}}) => setMode(value)}
-            onTempoChange={ ({target: {value}}) => setTempo(parseInt(value))}
-          />
-        </Options>
-
 
       </Wrapper>
 
 
 
-    </div>
+    </AppWrapper>
   );
 }
 
