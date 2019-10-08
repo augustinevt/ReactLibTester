@@ -4,13 +4,13 @@ import './App.css';
 
 import textExploder from 'text-exploder-two'
 
-const { Modal, dummyData } = textExploder
+const { Document, dummyData } = textExploder
 
 
 function App() {
   return (
     <div className="App">
-      <Modal data={dummyData} />
+      <Document data={dummyData} />
     </div>
   );
 }
