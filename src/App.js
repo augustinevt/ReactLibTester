@@ -23,7 +23,6 @@ const {
   ProgressionChordOptions,
   ProgressionWorkbench,
   ProgressionPatternOptions,
-  ChordBuilder
 } = MusicUI
 
 const Workbench = styled.div`
@@ -56,7 +55,6 @@ function App() {
   return (
     <div className="App">
       <Wrapper>
-        {activeIndex}
         <Workbench>
           <ProgressionWorkbench
             getKeyChords={() => getAllChords({mode, key})}
