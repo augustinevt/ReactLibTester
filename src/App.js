@@ -23,24 +23,23 @@ const {
   ProgressionChordOptions,
   ProgressionWorkbench,
   ProgressionPatternOptions,
+  GenerateButton,
 } = MusicUI
 
 const Workbench = styled.div`
   /* border: solid; */
-  /* width: 100%; */
+  width: 100%;
 `
 const Options = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   width: 100%;
   flex-wrap: wrap;
-
-  /* width: 100%;
-  height: 100%; */
+  margin-bottom: 30px;
 `
 
 const Wrapper = styled.div`
-  width: 80%;
+  width: 40%;
   /* border: solid; */
   display: flex;
   flex-wrap: wrap;
@@ -48,7 +47,7 @@ const Wrapper = styled.div`
 `
 
 const AppWrapper = styled.div`
-  border: solid;
+  /* border: solid; */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -63,7 +62,11 @@ function App() {
   const [chordPattern, setChordPattern] = useState([])
   const [activeIndex, setActiveIndex] = useState(0)
 
-  console.log(chords)
+  const generateChords = () => {
+    setChords(getRandomProgression(
+      { key, mode, tempo, theme: null }
+    ))
+  }
 
   return (
     <AppWrapper>
@@ -73,18 +76,19 @@ function App() {
         <Options>
 
           <ProgressionChordOptions
-            onSubmit={
-              () => setChords(getRandomProgression(
-                { key, mode, tempo, theme: null }
-              ))}
-            onKeyChange={ ({target: {value}}) => setKey(value) }
-            onModeChange={ ({target: {value}}) => setMode(value)}
-            onTempoChange={ ({target: {value}}) => setTempo(parseInt(value))}
+            keyVal={key}
+            modeVal={mode}
+            tempoVal={tempo}
+            onKeyChange={ value => setKey(value) }
+            onModeChange={ value => setMode(value)}
+            onTempoChange={ value => setTempo(parseInt(value))}
           />
 
           <ProgressionPatternOptions
             onChange={(pattern) => {setChordPattern(pattern)}}
           />
+
+          <GenerateButton onSubmit={generateChords}/>
         </Options>
 
         <Workbench>
